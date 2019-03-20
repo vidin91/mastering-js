@@ -1,13 +1,30 @@
 /**
  * EXPAND
+ * It's similar to mergeMap, but applies the projection function to every
+ * source value as well as every output value. It's recursive.
  */
 
-const Rx = require('rxjs');
-const ops = require('rxjs/operators');
+const {
+  of,
+  range
+} = require('rxjs');
 
-let numbers = Rx.of(1, 2, 3, 4);
-let observable = numbers.pipe(ops.expand(x => {
-  return Rx.range(0, x);
-}));
+const {
+  expand,
+  toArray
+} = require('rxjs/operators');
 
-observable.subscribe(x => console.log(x));
+of(3).pipe(
+  expand(val => range(0, val)),
+  toArray(),
+).subscribe(x => console.log(x));
+/**
+ * output:
+ * [ 3, 0, 1, 0, 2, 0, 1, 0 ]
+ * NOTE - deep-first seach (x - means observable ends)
+ *            3
+ *     0      1      2
+ *     x      0    0   1
+ *            x    x   0
+ *                     x
+ */

@@ -6,15 +6,40 @@
  * Observers see the same Observable execution.
  */
 
-const Rx = require('rxjs');
-const operators = require('rxjs/operators');
+const {
+  of,
+  Subject,
+  Observable
+} = require('rxjs');
 
-let src = Rx.from([1, 2, 3]);
-let subject = new Rx.Subject();
-let multicastObservable = src.pipe(operators.multicast(subject));
+const {
+  multicast
+} = require('rxjs/operators');
 
-console.log(multicastObservable instanceof Rx.Observable); // TRUE
+let source$ = new Observable(observer => {
+/**
+ * with multicast - this 'subscribe' function is executed only once,
+ * and when connect() is called
+ */
+  console.log('init');
+  observer.next(1);
+  observer.next(2);
+  observer.next(3);
+}).pipe(
+  multicast(new Subject())
+);
 
-multicastObservable.subscribe(x => console.log(`subscriber A: ${x}`));
+source$.subscribe(x => console.log(`Subscriber A: ${x}`));
+source$.subscribe(x => console.log(`Subscriber B: ${x}`));
 
-setTimeout(() => multicastObservable.connect(), 2000);
+setTimeout(() => source$.connect(), 2000);
+/**
+ * output: (2s delay)
+ * init
+ * Subscriber A: 1
+ * Subscriber B: 1
+ * Subscriber A: 2
+ * Subscriber B: 2
+ * Subscriber A: 3
+ * Subscriber B: 3
+ */

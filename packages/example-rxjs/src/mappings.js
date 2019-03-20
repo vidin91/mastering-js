@@ -1,7 +1,6 @@
-const { of, from, interval, range, merge, timer} = require('rxjs');
-const { 
-  map, delay, concat, concatAll, take, mapTo,
-  combineLatest, buffer, toArray, mergeAll, mergeMap,
+const { of, range, merge, timer} = require('rxjs');
+const {
+  map, take, mapTo, toArray, mergeAll, mergeMap
  } = require('rxjs/operators');
 
 /**
@@ -16,7 +15,7 @@ const {
  * merge - Turn multiple observables into a single observable (use as static method)
  * 
  * mergeAll(concurrent: number): Observable - Flattens an Observable-of-Observables.
- * Converts a higher-order Observable into a first-order Observable which concurrently
+ * Converts a higher-order Observable (aka outher) into a first-order Observable which concurrently
  * delivers all values that are emitted on the inner Observables.
  * 
  * NOTE - mergeMap = map + mergeAll
