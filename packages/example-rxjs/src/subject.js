@@ -1,5 +1,5 @@
 /**
- * Subject
+ * Subject - multicast values (Observable is unicast)
  * Special type of Observable that allows values to be multicasted to many Observers.
  * Internally to the Subject, subscribe does not invoke a new execution that delivers values.
  * It simply registers the given Observer in a list of Observers, similarly to how addListener
