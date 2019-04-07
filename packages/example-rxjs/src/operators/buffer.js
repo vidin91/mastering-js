@@ -1,6 +1,6 @@
 /**
- * BUFER
- * TODO - Clarify!!!
+ * BUFER - buffers values from observable in sequences -
+ * when it gets notified by notifier (another observable)
  */
 
 const Rx = require('rxjs');
