@@ -5,9 +5,8 @@
 const Rx = require('rxjs');
 const ops = require('rxjs/operators');
 
-let numbers = Rx.of(1, 2, 3, 4);
-let observable = numbers.pipe(ops.expand(x => {
-  return Rx.range(0, x);
-}));
+let n = Rx.of(2, 3).pipe(
+  ops.mergeScan((acc, val) => Rx.range(0, val), 0)
+);
 
-observable.subscribe(x => console.log(x));
+n.subscribe(x => console.log(x));

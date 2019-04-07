@@ -1,0 +1,26 @@
+{
+  "name": "file-system",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "Milos Milenovic <vidin912@gmail.com>",
+  "homepage": "https://github.com/vidin91/mastering-js#readme",
+  "license": "ISC",
+  "main": "lib/file-system.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vidin91/mastering-js.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/vidin91/mastering-js/issues"
+  }
+}
